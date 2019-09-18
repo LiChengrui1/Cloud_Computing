@@ -1,2 +1,2 @@
-[installtation](/installtation/installtation.md)
+[installation](/installation/installation.md)
 
