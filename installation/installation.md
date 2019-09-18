@@ -74,7 +74,7 @@ git config --global user.name “your name”
 git config --global user.email “email@example.com”
 ```
 
-**注意：**这里"email@example.com"替换成你的GitHub邮箱。
+**注意：** 这里"email@example.com"替换成你的GitHub邮箱。
 
 
 
@@ -84,7 +84,7 @@ git config --global user.email “email@example.com”
 
 ![](./image/9.png)
 
-**注意：**填写仓库的名称“Repository name”，添加描述“Description”，还可以添加README（此处先不添加，后续采用命令行操作），以及添加忽略文件和开源协议。
+**注意：** 填写仓库的名称“Repository name”，添加描述“Description”，还可以添加README（此处先不添加，后续采用命令行操作），以及添加忽略文件和开源协议。
 
 首先在本地规划好一处文件夹用于同步GitHub的项目，然后打开Git Bash，定位到此次你想要同步的GitHub项目的文件夹，使用“cd”命令。
 
@@ -102,7 +102,7 @@ git init
 git remote add origin “your url”
 ```
 
-**注意：**your url替换成你的项目url。
+**注意：** your url替换成你的项目url。
 
 验证是否成功
 
@@ -130,7 +130,7 @@ git add .
 git commit -m "your name"
 ```
 
-**注意：**your name替换成你的项目名。
+**注意：** your name替换成你的项目名。
 
 推送本地仓库更新至远程服务器
 
@@ -140,7 +140,7 @@ git push -u origin master
 
 <img src="./image/12.png" style="zoom:104%;" />
 
-**注意：**如果需要再次在本地更新，只需执行cd和最后三条命令。
+**注意：** 如果需要再次在本地更新，只需执行cd和最后三条命令。
 
 ## **3. 本地安装VMware Workstation和CentOS操作系统**
 
