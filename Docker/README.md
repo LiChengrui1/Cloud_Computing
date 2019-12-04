@@ -1,3 +1,5 @@
+## 实验一
+
 ### 1.安装Docker
 
 **更新应用程序数据库**
@@ -40,7 +42,11 @@ docker version
 
 <img src="./image/2.png" style="zoom:100%;" />
 
-### 2.Docker加载CentOS镜像
+
+
+## 实验二
+
+### 1.Docker加载CentOS镜像
 
 **查看当前系统docker的相关信息：**
 
@@ -72,7 +78,7 @@ docker images
 
 <img src="./image/6.png" style="zoom:100%;" />
 
-**创建并运行Docker容器（为了方便检测后续wordpress搭建是否成功，需设置端口映射（-p），将容器端口80 映射到主机端口8888，Apache和MySQL需要 systemctl 管理服务启动，需要加上参数 --privileged 来增加权，并且不能使用默认的bash，换成 init，否则会提示 Failed to get D-Bus connection: Operation not permitted ，命令如下 ）**
+**创建并运行Docker容器（为了方便检测后续wordpress搭建是否成功，需设置端口映射（-p），将容器端口80 映射到主机端口8888，Apache和MySQL需要 systemctl 管理服务启动，需要加上参数 --privileged 来增加权，并且不能使用默认的bash，换成 init，否则会提示 Failed to get D-Bus connection: Operation not permitted  ）**
 
 ```
 docker run -d -it --privileged --name wordpress -p 8888:80 -d centos:7 /usr/sbin/init
@@ -94,7 +100,7 @@ docker ps
 docker exec -it 009 /bin/bash
 ```
 
-### 3.容器中安装wordpress
+### 2.容器中安装wordpress
 
 **参照上次wordpress的安装实验过程**
 
@@ -159,7 +165,7 @@ mv wordpress /var/www/html
 
 <img src="./image/14.png" style="zoom:100%;" />
 
-### 4.将带有WordPress的CentOS镜像推送到容器仓库
+### 3.将带有WordPress的CentOS镜像推送到容器仓库
 
 **先去docker hub官网注册**
 
@@ -193,3 +199,135 @@ docker push 镜像名:tag标签
 
 <img src="./image/18.png" style="zoom:100%;" />
 
+
+
+## 实验三
+
+#### **1. 创建工作目录**
+
+```
+mkdir /opt/dockerfile_wordpress
+```
+
+```
+cd /opt/dockerfile_wordpress
+```
+
+#### **2. 创建并编写Dockerfile文件**
+
+```
+vim dockerfile
+```
+
+**文件内容：**
+
+<img src="./image/19.png" style="zoom:100%;" />
+
+<img src="./image/20.png" style="zoom:100%;" />
+
+#### **3. 编写脚本文件及sql文件**
+
+**创建shfile目录并在里面编写脚本文件**
+
+```
+mkdir shfile
+```
+
+**目录结构如下**
+
+<img src="./image/21.png" style="zoom:100%;" />
+
+<img src="./image/22.png" style="zoom:100%;" />
+
+**脚本文件内容如下**
+
+**start_all.sh**
+
+用于第一次启动mysql，执行sql文件，启动httpd，第一次执行后删除，以后执行start_all2.sh。
+
+启动mysql和httpd的语句来自各自的service文件。
+
+<img src="./image/23.png" style="zoom:100%;" />
+
+**start_all2.sh**
+
+第二次后启动容器后执行，用于开启httpd和mysql服务
+
+启动和停止的语句来自各自的service文件。
+
+<img src="./image/24.png" style="zoom:100%;" />
+
+**sql文件**
+
+为WordPress创建一个MySQL数据库
+
+<img src="./image/25.png" style="zoom:100%;" />
+
+#### **4. 构建镜像**
+
+```
+docker build -t mywp .
+```
+
+<img src="./image/26.png" style="zoom:100%;" />
+
+构建中...
+
+构建成功
+
+<img src="./image/27.png" style="zoom:100%;" />
+
+#### **5. 运行容器并验证**
+
+```
+docker run -d -it -p 8989:80 mywp
+```
+
+<img src="./image/28.png" style="zoom:100%;" />
+
+```
+docker ps
+```
+
+<img src="./image/35.png" style="zoom:100%;" />
+
+#### **6. 验证容器中的服务是否都安装成功**
+
+**进入容器前台**
+
+```
+docker exec -it ce6 /bin/bash
+```
+
+**容器里进入Mysql ，并查看数据库（说明mysql安装成功）**
+
+```
+mysql
+show databases;
+```
+
+<img src="./image/29.png" style="zoom:100%;" />
+
+**查看php版本（说明php安装成功）**
+
+```
+php -v
+```
+
+<img src="./image/30.png" style="zoom:100%;" />
+
+**浏览器查看ip:8989（说明apache web、wordpress安装成功）**
+
+<img src="./image/31.png" style="zoom:100%;" />
+
+#### **7. Web里配置wordpress**
+
+**输入数据库用户名和密码**
+
+<img src="./image/32.png" style="zoom:100%;" />
+
+<img src="./image/33.png" style="zoom:100%;" />
+
+**成功进入，端口映射为8989**
+
+<img src="./image/34.png" style="zoom:100%;" />
