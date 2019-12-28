@@ -242,7 +242,7 @@ ssh-copy-id osd1
 ssh-copy-id osd2
 ```
 
-**测试连接各节点ssh **
+**测试连接各节点ssh**
 
 <img src="./image/12.png" style="zoom:70%;" />
 
