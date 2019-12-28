@@ -296,7 +296,7 @@ ceph-deploy gatherkeys mon1
 
 <img src="./image/16.png" style="zoom:70%;" />
 
-**为osd守护进程创建目录 **
+**为osd守护进程创建目录**
 
 **osd节点：**
 
@@ -331,7 +331,7 @@ sudo chmod 644 /etc/ceph/ceph.client.admin.keyring
 
 ## 6.检查集群状态  
 
-**从ceph-admin节点登录到ceph监视服务器“ mon1 ”， 运行以下命令以检查集群运行状况。 **
+**从ceph-admin节点登录到ceph监视服务器“ mon1 ”， 运行以下命令以检查集群运行状况。**
 
 ```
 ssh mon1
